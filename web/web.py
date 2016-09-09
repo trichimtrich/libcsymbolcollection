@@ -78,6 +78,6 @@ def appindex():
 @app.route("/json", methods=['GET', 'POST'])
 def appjson():
 	msg, hope = query()
-	return json.dumps(hope)
+	return json.dumps(hope), 200, {'Content-Type': 'application/json; charset=utf-8'}
 
 app.run(host="0.0.0.0", debug=False)
