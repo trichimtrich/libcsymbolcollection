@@ -9,19 +9,14 @@ A little Hope in dark day
 ### WebUI on your-own-server
 - Python Flask/Mongo Client ```pip install Flask pymongo```
 - Install [MongoDB] (https://www.mongodb.com/) Server as well
-- Extract and restore database
 ```
-cd web
-unzip dumps.zip
-mongorestore -d libc
 mongod --dbpath=<whatever folder you want> &
 ```
 
-- Or just use my sample
+- Extract and restore database
 ```
 cd web
-unzip libc_mongo.zip
-mongod --dbpath=libc_mongo &
+python import_symbol_to_mongo.py ../libc.sym
 ```
 
 ## Usage
@@ -30,6 +25,22 @@ Run `python web.py` or try mine [http://libc.trich.im] (http://libc.trich.im)
 
 ### CLI
 You are welcome! ```python libc.py help```
+
+### Update new lib
+- Run scape script to find new lib, export to text file
+```
+bash scrape_ubuntu_launchpad.sh > new_grab.txt
+```
+
+- Download deb and parse, it will create backup and new symbol files
+```
+python extract_deb.py new_grab.txt <old_grab_file>
+```
+
+- Restore to mongo database if needed
+```
+python web/import_symbol_to_mongo.py ../libc.sym
+```
 
 ## License
 Feel free to do whatever you want
