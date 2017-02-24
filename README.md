@@ -13,10 +13,16 @@ A little Hope in dark day
 mongod --dbpath=<whatever folder you want> &
 ```
 
-- Extract and restore database
+- Restore database
 ```
 cd web
 python import_symbol_to_mongo.py ../libc.sym
+```
+
+- Or just extract current db directory
+```
+cd web
+unzip libc_db.zip
 ```
 
 ## Usage
